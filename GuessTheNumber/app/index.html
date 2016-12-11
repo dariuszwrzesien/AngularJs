@@ -25,12 +25,10 @@
       angular.module('app',[]).controller('GuessTheNumberController', GuessTheNumberController);
       function GuessTheNumberController($scope) {
           $scope.verifyGuess = function () {
-              console.log('1');
               $scope.deviation = $scope.original - $scope.guess;
               $scope.noOfTries = $scope.noOfTries + 1;
           }
           $scope.initializeGame = function () {
-              console.log('2');
               $scope.noOfTries = 0;
               $scope.original = Math.floor((Math.random() * 1000) + 1);
               $scope.guess = null;
