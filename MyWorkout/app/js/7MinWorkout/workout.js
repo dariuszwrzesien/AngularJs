@@ -160,6 +160,41 @@ angular.module('7minWorkout').controller('WorkoutController', ['$scope', '$inter
             , $scope.currentExercise.duration);
     };
 
+    /**
+     * Odpowiada za przejscie do wybranego ćwiczenia
+     * Jeśli obencnym ćwiczeniem nie jest Odpoczynek to po zakończeniuu ćw przejdzie do odpoczynku
+     */
+    var getNextExercise = function (currentExercisePlan) {
+        var nextExercise = null;
+        if (currentExercisePlan === restExercise) {
+            nextExercise = workoutPlan.exercises.shift();
+        }
+        else {
+            if (workoutPlan.exercises.length != 0) {
+                nextExercise = restExercise;
+            }
+        }
+        return nextExercise;
+    };
+
+    /**
+     * Czujka sprawdzająca zmiany wartości właściwości currentExcerciseDuration
+     */
+    $scope.$watch('currentExerciseDuration', function (nVal) {
+        if (nVal == $scope.currentExercise.duration) {
+            var next = getNextExercise($scope.currentExercise);
+            if (next) {
+                startExercise(next);
+            } else {
+                console.log("Trening został zakończony!")
+            }
+        }
+    });
+
+
+    /**
+     * Inicjalizacja
+     */
     init();
 
     }]);
