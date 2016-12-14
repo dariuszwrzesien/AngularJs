@@ -157,7 +157,16 @@ angular.module('7minWorkout').controller('WorkoutController', ['$scope', '$inter
                 $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
             }
             , 1000
-            , $scope.currentExercise.duration);
+            , $scope.currentExercise.duration)
+            .then(function () { //wykorzystanie obietnic (ang. promises)
+                var next = getNextExercise(exercisePlan);
+                if (next) {
+                    startExercise(next);
+                }
+                else {
+                    console.log("Trening został zakończony!")
+                }
+            });
     };
 
     /**
@@ -178,19 +187,19 @@ angular.module('7minWorkout').controller('WorkoutController', ['$scope', '$inter
     };
 
     /**
+     * scope.$watch
      * Czujka sprawdzająca zmiany wartości właściwości currentExcerciseDuration
      */
-    $scope.$watch('currentExerciseDuration', function (nVal) {
-        if (nVal == $scope.currentExercise.duration) {
-            var next = getNextExercise($scope.currentExercise);
-            if (next) {
-                startExercise(next);
-            } else {
-                console.log("Trening został zakończony!")
-            }
-        }
-    });
-
+    // $scope.$watch('currentExerciseDuration', function (nVal) {
+    //     if (nVal == $scope.currentExercise.duration) {
+    //         var next = getNextExercise($scope.currentExercise);
+    //         if (next) {
+    //             startExercise(next);
+    //         } else {
+    //             console.log("Trening został zakończony!")
+    //         }
+    //     }
+    // });
 
     /**
      * Inicjalizacja
