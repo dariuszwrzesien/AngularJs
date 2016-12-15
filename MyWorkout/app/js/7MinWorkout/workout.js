@@ -1,4 +1,6 @@
-angular.module('7minWorkout').controller('WorkoutController', ['$scope', '$interval', function($scope, $interval) {
+angular.module('7minWorkout').controller('WorkoutController',
+    ['$scope', '$interval', '$location',
+        function($scope, $interval, $location) {
 
     /**
      * Model
@@ -164,7 +166,7 @@ angular.module('7minWorkout').controller('WorkoutController', ['$scope', '$inter
                     startExercise(next);
                 }
                 else {
-                    console.log("Trening został zakończony!")
+                    $location.path('/finish');
                 }
             });
     };
