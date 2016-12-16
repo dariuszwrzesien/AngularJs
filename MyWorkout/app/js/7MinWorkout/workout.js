@@ -166,7 +166,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                     startExercise(next);
                 }
                 else {
-                    $location.path('/finish');
+                    $location.path('/finish'); //po skonczonym cwiczeniu przejdz do widoku finish
                 }
             });
     };

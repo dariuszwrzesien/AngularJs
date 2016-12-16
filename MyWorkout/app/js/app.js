@@ -1,5 +1,5 @@
 angular.module('app', ['ngRoute', '7minWorkout']).
-    config(function ($routeProvider) {
+    config(function ($routeProvider, $sceDelegateProvider) {
         $routeProvider.when('/start', {
             templateUrl: 'partials/start.html' });
         $routeProvider.when('/workout', {
@@ -10,5 +10,10 @@ angular.module('app', ['ngRoute', '7minWorkout']).
         $routeProvider.otherwise({
             redirectTo: '/start'
         });
+    $sceDelegateProvider.resourceUrlWhitelist([
+        // zezwalamy na zasoby z tego samego źródła
+        'self',
+        // zezwalamy na zasoby z youtube
+        'http://*.youtube.com/**']);
 });
 angular.module('7minWorkout', []);
