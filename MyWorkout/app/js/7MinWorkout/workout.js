@@ -21,6 +21,14 @@ angular.module('7minWorkout').controller('WorkoutController',
         this.name = args.name;
         this.title = args.title;
         this.restBetweenExercise = args.restBetweenExercise;
+        this.totalWorkoutDuration = function () {
+            if (this.exercises.length == 0) return 0;
+            var total = 0;
+            angular.forEach(this.exercises, function (exercise) {
+                total = total + exercise.duration;
+            });
+            return this.restBetweenExercise * (this.exercises.length - 1) + total;
+        }
     };
 
     /**
@@ -35,6 +43,10 @@ angular.module('7minWorkout').controller('WorkoutController',
 
     var startWorkout = function () {
         workoutPlan = createWorkout();
+        /**
+         * Ustawiam całkowity czas trwania treningu
+         */
+        $scope.workoutTimeRemaining = workoutPlan.totalWorkoutDuration();
 
         /**
          * Ustawiam odpoczynek jako jedno z ćwiczeń
@@ -48,6 +60,13 @@ angular.module('7minWorkout').controller('WorkoutController',
             }),
             duration: workoutPlan.restBetweenExercise
         };
+
+        /**
+         * Co sekunde odejmuje  sekunde od całkowitego czasu trwania treningu
+         */
+        $interval(function () {
+            $scope.workoutTimeRemaining = $scope.workoutTimeRemaining - 1;
+        }, 1000, $scope.workoutTimeRemaining);
 
         /**
          * Zdejmuje kolejno po jednym ćwiczeniu z tablicy excercise
