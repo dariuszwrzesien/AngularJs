@@ -13,3 +13,8 @@ angular.module('7minWorkout').filter('secondsToTime', function () {
             + ("0" + seconds).substr(-2);
     }
 });
+angular.module('7minWorkout').filter('myLineBreakFilter', function () {
+    return function (input) {
+        return input.replace(/\./g, "<br/>");
+    }
+});
