@@ -39,14 +39,13 @@ angular.module('7minWorkout').controller('WorkoutController',
     };
 
     var restExercise;
-    var workoutPlan;
 
     var startWorkout = function () {
-        workoutPlan = createWorkout();
+        $scope.workoutPlan = createWorkout();
         /**
          * Ustawiam całkowity czas trwania treningu
          */
-        $scope.workoutTimeRemaining = workoutPlan.totalWorkoutDuration();
+        $scope.workoutTimeRemaining = $scope.workoutPlan.totalWorkoutDuration();
 
         /**
          * Ustawiam odpoczynek jako jedno z ćwiczeń
@@ -58,7 +57,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                 description: "Odpocznij trochę !",
                 image: "img/rest.png"
             }),
-            duration: workoutPlan.restBetweenExercise
+            duration: $scope.workoutPlan.restBetweenExercise
         };
 
         /**
@@ -71,7 +70,7 @@ angular.module('7minWorkout').controller('WorkoutController',
         /**
          * Zdejmuje kolejno po jednym ćwiczeniu z tablicy excercise
          */
-        startExercise(workoutPlan.exercises.shift());
+        startExercise($scope.workoutPlan.exercises.shift());
     };
 
     var createWorkout = function () {
@@ -197,10 +196,10 @@ angular.module('7minWorkout').controller('WorkoutController',
     var getNextExercise = function (currentExercisePlan) {
         var nextExercise = null;
         if (currentExercisePlan === restExercise) {
-            nextExercise = workoutPlan.exercises.shift();
+            nextExercise = $scope.workoutPlan.exercises.shift();
         }
         else {
-            if (workoutPlan.exercises.length != 0) {
+            if ($scope.workoutPlan.exercises.length != 0) {
                 nextExercise = restExercise;
             }
         }

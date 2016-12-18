@@ -16,8 +16,14 @@
                          ng-style="{'width':(currentExerciseDuration/currentExercise.duration) * 100 + '%'}">
                     </div>
                 </div>
-                <h1>Pozostało czasu:
-                    {{currentExercise.duration-currentExerciseDuration}}</h1>
+            </div>
+            <div class="row">
+                <h3 class="col-sm-6 text-left">Pozostało czasu:
+                    <strong>{{currentExercise.duration-currentExerciseDuration}}</strong>
+                </h3>
+                <h3 class="col-sm-6 text-right" ng-if="currentExercise.details.name=='rest'">
+                    Następne ćwiczenie: <strong>{{workoutPlan.exercises[0].details.title}}</strong>
+                </h3>
             </div>
         </div>
     </div>
