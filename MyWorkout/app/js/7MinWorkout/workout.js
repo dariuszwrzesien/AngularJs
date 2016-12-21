@@ -39,14 +39,9 @@ angular.module('7minWorkout').controller('WorkoutController',
     };
 
     var restExercise;
-
     var startWorkout = function () {
         $scope.workoutPlan = createWorkout();
-        /**
-         * Ustawiam całkowity czas trwania treningu
-         */
         $scope.workoutTimeRemaining = $scope.workoutPlan.totalWorkoutDuration();
-
         /**
          * Ustawiam odpoczynek jako jedno z ćwiczeń
          */
@@ -54,12 +49,11 @@ angular.module('7minWorkout').controller('WorkoutController',
             details: new Exercise({
                 name: "rest",
                 title: "Odpoczynek!",
-                description: "Odpocznij trochę !",
-                image: "img/rest.png"
+                description: "Odpocznij trochę!",
+                image: "img/rest.png",
             }),
             duration: $scope.workoutPlan.restBetweenExercise
         };
-
         /**
          * Co sekunde odejmuje  sekunde od całkowitego czasu trwania treningu
          */
@@ -67,10 +61,8 @@ angular.module('7minWorkout').controller('WorkoutController',
             $scope.workoutTimeRemaining = $scope.workoutTimeRemaining - 1;
         }, 1000, $scope.workoutTimeRemaining);
 
-        /**
-         * Zdejmuje kolejno po jednym ćwiczeniu z tablicy excercise
-         */
-        startExercise($scope.workoutPlan.exercises.shift());
+        $scope.currentExerciseIndex = -1;
+        startExercise($scope.workoutPlan.exercises[0]);
     };
 
     var createWorkout = function () {
@@ -200,10 +192,10 @@ angular.module('7minWorkout').controller('WorkoutController',
     var getNextExercise = function (currentExercisePlan) {
         var nextExercise = null;
         if (currentExercisePlan === restExercise) {
-            nextExercise = $scope.workoutPlan.exercises.shift();
+            nextExercise = $scope.workoutPlan.exercises[$scope.currentExerciseIndex + 1];
         }
         else {
-            if ($scope.workoutPlan.exercises.length != 0) {
+            if ($scope.currentExerciseIndex < $scope.workoutPlan.exercises.length - 1) {
                 nextExercise = restExercise;
             }
         }

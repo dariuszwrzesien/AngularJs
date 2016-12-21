@@ -27,7 +27,7 @@
                     <strong>{{currentExercise.duration-currentExerciseDuration}}</strong>
                 </h3>
                 <h3 class="col-sm-6 text-right" ng-if="currentExercise.details.name=='rest'">
-                    Następne ćwiczenie: <strong>{{workoutPlan.exercises[0].details.title}}</strong>
+                    Następne ćwiczenie: <strong>{{workoutPlan.exercises[currentExerciseIndex + 1].details.title}}</strong>
                 </h3>
             </div>
         </div>
