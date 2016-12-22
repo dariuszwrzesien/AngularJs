@@ -251,6 +251,8 @@ angular.module('7minWorkout').controller('WorkoutAudioController',
             $scope.exercisesAudio = [];
             var workoutPlanwatch = $scope.$watch('workoutPlan',
                 function (newValue, oldValue) {
+                    console.log(newValue);
+                    console.log(oldValue);
                     if (newValue) { // newValue==workoutPlan
                         angular.forEach($scope.workoutPlan.exercises,
                             function (exercise) {
@@ -263,6 +265,8 @@ angular.module('7minWorkout').controller('WorkoutAudioController',
                     }
                 });
             $scope.$watch('currentExercise', function (newValue, oldValue) {
+                console.log(newValue);
+                console.log(oldValue);
                 if (newValue && newValue != oldValue) {
                     if ($scope.currentExercise.details.name == 'rest') {
                         $timeout(function () {
@@ -275,11 +279,12 @@ angular.module('7minWorkout').controller('WorkoutAudioController',
                 }
             });
             $scope.$watch('currentExerciseDuration', function (newValue, oldValue) {
+                console.log(newValue);
+                console.log(oldValue);
                 if (newValue) {
                     if (newValue == $scope.currentExercise.duration / 2 && $scope.currentExercise.details.name != 'rest') {
                         $scope.halfWayAudio.play();
-                    }
-                else if (newValue == $scope.currentExercise.duration - 3) {
+                    } else if (newValue == $scope.currentExercise.duration - 3) {
                         $scope.aboutToCompleteAudio.play();
                     }
                 }
