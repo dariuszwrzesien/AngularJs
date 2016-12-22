@@ -15,6 +15,9 @@ angular.module('7minWorkout').filter('secondsToTime', function () {
 });
 angular.module('7minWorkout').filter('myLineBreakFilter', function () {
     return function (input) {
-        return input.replace(/\./g, "<br/>");
+        if (input) {
+            return input.replace(/\./g, "<br/>");
+        }
+        return input;
     }
 });

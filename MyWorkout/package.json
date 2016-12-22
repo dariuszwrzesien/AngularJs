@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "MyWorkout",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "MyWorkout based on AngularJS by Example",
+  "repository": "https://github.com/dariuszwrzesien/AngularJs",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",

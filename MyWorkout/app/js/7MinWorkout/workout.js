@@ -4,7 +4,7 @@ angular.module('7minWorkout').controller('WorkoutController',
 
     /**
      * Model
-     * Na model składa się Excercise i WoroutPlan
+     * Na model składa się Excercise i WorkoutPlan
      */
     function Exercise(args) {
         this.name = args.name;
@@ -56,7 +56,7 @@ angular.module('7minWorkout').controller('WorkoutController',
             duration: $scope.workoutPlan.restBetweenExercise
         };
 
-        $scope.currentExerciseIndex = -1;
+        $scope.currentExerciseIndex = 0;
         startExercise($scope.workoutPlan.exercises[0]);
     };
 
@@ -176,6 +176,7 @@ angular.module('7minWorkout').controller('WorkoutController',
             var next = getNextExercise($scope.currentExercise);
             if (next) {
                 startExercise(next);
+
             }
             else {
                 $location.path('/finish');
@@ -205,18 +206,23 @@ angular.module('7minWorkout').controller('WorkoutController',
 
     /**
      * Odpowiada za przejscie do wybranego ćwiczenia
-     * Jeśli obencnym ćwiczeniem nie jest Odpoczynek to po zakończeniuu ćw przejdzie do odpoczynku
+     * Jeśli obencnym ćwiczeniem nie jest Odpoczynek to po zakończeniu ćw przejdzie do odpoczynku
      */
     var getNextExercise = function (currentExercisePlan) {
         var nextExercise = null;
         if (currentExercisePlan === restExercise) {
             nextExercise = $scope.workoutPlan.exercises[$scope.currentExerciseIndex + 1];
+            /**
+             * Inkrementuje index $scope.currentExerciseIndex
+             */
+            ++$scope.currentExerciseIndex;
         }
         else {
             if ($scope.currentExerciseIndex < $scope.workoutPlan.exercises.length - 1) {
                 nextExercise = restExercise;
             }
         }
+
         return nextExercise;
     };
 
@@ -279,14 +285,34 @@ angular.module('7minWorkout').controller('WorkoutAudioController',
                 }
             });
             $scope.$watch('currentExerciseDuration', function (newValue, oldValue) {
-                console.log(newValue);
-                console.log(oldValue);
                 if (newValue) {
                     if (newValue == $scope.currentExercise.duration / 2 && $scope.currentExercise.details.name != 'rest') {
                         $scope.halfWayAudio.play();
                     } else if (newValue == $scope.currentExercise.duration - 3) {
                         $scope.aboutToCompleteAudio.play();
                     }
+                }
+            });
+            /**
+             * Czujka sprawdza stan workoutPaused
+             */
+            $scope.$watch('workoutPaused', function (newValue, oldValue) {
+                if (newValue) {
+                    $scope.ticksAudio.pause();
+                    $scope.nextUpAudio.pause();
+                    $scope.nextUpExerciseAudio.pause();
+                    $scope.halfWayAudio.pause();
+                    $scope.aboutToCompleteAudio.pause();
+                }
+                else {
+                    $scope.ticksAudio.play();
+                    if ($scope.halfWayAudio.currentTime > 0 &&
+                        $scope.halfWayAudio.currentTime < $scope.halfWayAudio.duration)
+                        $scope.halfWayAudio.play();
+                    if ($scope.aboutToCompleteAudio.currentTime > 0 &&
+                        $scope.aboutToCompleteAudio.currentTime <
+                        $scope.aboutToCompleteAudio.duration)
+                        $scope.aboutToCompleteAudio.play();
                 }
             });
             var init = function () {
