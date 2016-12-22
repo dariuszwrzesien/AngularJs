@@ -39,6 +39,7 @@ angular.module('7minWorkout').controller('WorkoutController',
     };
 
     var restExercise;
+    var exerciseIntervalPromise;
     var startWorkout = function () {
         $scope.workoutPlan = createWorkout();
         $scope.workoutTimeRemaining = $scope.workoutPlan.totalWorkoutDuration();
@@ -54,12 +55,6 @@ angular.module('7minWorkout').controller('WorkoutController',
             }),
             duration: $scope.workoutPlan.restBetweenExercise
         };
-        /**
-         * Co sekunde odejmuje  sekunde od całkowitego czasu trwania treningu
-         */
-        $interval(function () {
-            $scope.workoutTimeRemaining = $scope.workoutTimeRemaining - 1;
-        }, 1000, $scope.workoutTimeRemaining);
 
         $scope.currentExerciseIndex = -1;
         startExercise($scope.workoutPlan.exercises[0]);
@@ -169,21 +164,44 @@ angular.module('7minWorkout').controller('WorkoutController',
     var startExercise = function (exercisePlan) {
         $scope.currentExercise = exercisePlan;
         $scope.currentExerciseDuration = 0;
-        $interval(function () {
-                $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
-            }
-            , 1000
-            , $scope.currentExercise.duration)
-            .then(function () { //wykorzystanie obietnic (ang. promises)
-                var next = getNextExercise(exercisePlan);
-                if (next) {
-                    startExercise(next);
-                }
-                else {
-                    $location.path('/finish'); //po skonczonym cwiczeniu przejdz do widoku finish
-                }
-            });
+        exerciseIntervalPromise = startExerciseTimeTracking();
     };
+
+    var startExerciseTimeTracking = function () {
+        var promise = $interval(function () {
+            ++$scope.currentExerciseDuration;
+            --$scope.workoutTimeRemaining;
+        }, 1000, $scope.currentExercise.duration - $scope.currentExerciseDuration);
+        promise.then(function () {
+            var next = getNextExercise($scope.currentExercise);
+            if (next) {
+                startExercise(next);
+            }
+            else {
+                $location.path('/finish');
+            }
+        }, function (error) {
+            console.log('Obietnica $interval anulowana. Powód: -' + error);
+        });
+        return promise;
+    }
+
+    $scope.pauseWorkout = function () {
+        $interval.cancel(exerciseIntervalPromise);
+        $scope.workoutPaused = true;
+    };
+    $scope.resumeWorkout = function () {
+        exerciseIntervalPromise = startExerciseTimeTracking();
+        $scope.workoutPaused = false;
+    };
+    $scope.pauseResumeToggle = function () {
+        if ($scope.workoutPaused) {
+            $scope.resumeWorkout();
+        }
+        else {
+            $scope.pauseWorkout();
+        }
+    }
 
     /**
      * Odpowiada za przejscie do wybranego ćwiczenia
