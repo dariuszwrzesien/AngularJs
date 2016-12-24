@@ -187,6 +187,9 @@ angular.module('7minWorkout').controller('WorkoutController',
         return promise;
     }
 
+    /**
+     * Sterowanie przebiegiem aplikacji: Pause, resume oraz przełącznik pause/resume
+     */
     $scope.pauseWorkout = function () {
         $interval.cancel(exerciseIntervalPromise);
         $scope.workoutPaused = true;
@@ -203,6 +206,19 @@ angular.module('7minWorkout').controller('WorkoutController',
             $scope.pauseWorkout();
         }
     }
+
+    /**
+     * Pauza wywołana z klawiatury.
+     * Naciśnięcie klasiwsz P (litery 'p lub' 'P')
+     * powoduje przełączenie się stanu aplikacji
+     *
+     * @param event
+     */
+    $scope.onKeyPressed = function (event) {
+        if (event.which == 80 || event.which == 112) {
+            $scope.pauseResumeToggle();
+        }
+    };
 
     /**
      * Odpowiada za przejscie do wybranego ćwiczenia
