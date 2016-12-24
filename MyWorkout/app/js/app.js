@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout', 'mediaPlayer']).
+angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout', 'mediaPlayer', 'ui.bootstrap']).
     config(function ($routeProvider, $sceDelegateProvider) {
         $routeProvider.when('/start', {
             templateUrl: 'partials/start.html' });
@@ -14,6 +14,7 @@ angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout', 'mediaPlayer']).
         // zezwalamy na zasoby z tego samego źródła
         'self',
         // zezwalamy na zasoby z youtube
-        'http://*.youtube.com/**']);
+        'http://*.youtube.com/**',
+        'https://*.ytimg.com/**']);
 });
 angular.module('7minWorkout', []);

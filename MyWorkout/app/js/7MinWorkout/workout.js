@@ -83,7 +83,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                 description: "Pajacyki to proste ćwiczenie fizyczne polegające na podskakiwaniu i wymachiwaniu rękoma.",
                 image: "img/JumpingJacks.png",
                 nameSound: "content/jumpingjacks.wav",
-                videos: ["//www.youtube.com/embed/dmYwZH_BNd0", "//www.youtube.com/embed/BABOdJ-2Z6o", "//www.youtube.com/embed/c4DAnQ6DtF8"],
+                videos: ["dmYwZH_BNd0", "BABOdJ-2Z6o", "c4DAnQ6DtF8"],
                 procedure: "Stań w pozycji wyprostowanej, złącz stopy, a ramiona opuść swobodnie wzdłuż tułowia. \
                               Zegnij lekko kolana, a następnie wyskocz kilkanaście centymetrów w górę. \
                               W wyskoku rozłącz nogi, mniej więcej na szerokość ramion lub nieco szerzej, i jednocześnie wykonaj lekko zgiętymi w łokciach rękoma wymach nad głową. \
@@ -102,7 +102,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                 description: "Krzesełko to popularne ćwiczenie wzmacniające mięsień czworogłowy uda.",
                 image: "img/wallsit.png",
                 nameSound: "content/wallsit.wav",
-                videos: ["//www.youtube.com/embed/y-wV4Venusw", "//www.youtube.com/embed/MMV3v4ap4ro"],
+                videos: ["y-wV4Venusw", "MMV3v4ap4ro"],
                 procedure: "Stań przy ścianie, opierając się o nią plecami. \
                               Stopy rozstaw na szerokość ramion i nieco odsuń od ściany. \
                               Następnie, wciąż opierając się o ścianę, zsuwaj tułów w dół aż do momentu, gdy nogi zgięte w kolanach utworzą kąt prosty. \
@@ -121,7 +121,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                 description: "Pompki to popularne ćwiczenie wykonywane w pozycji leżącej na brzuchu, polegające na podnoszeniu i opuszczaniu ciała na rękach.",
                 image: "img/Pushup.png",
                 nameSound: "content/pushups.wav",
-                videos: ["//www.youtube.com/embed/Eh00_rniF8E", "//www.youtube.com/embed/ZWdBqFLNljc", "//www.youtube.com/embed/UwRLWMcOdwI", "//www.youtube.com/embed/ynPwl6qyUNM", "//www.youtube.com/embed/OicNTT2xzMI"],
+                videos: ["Eh00_rniF8E", "ZWdBqFLNljc", "UwRLWMcOdwI", "ynPwl6qyUNM", "OicNTT2xzMI"],
                 procedure: "Połóż się na brzuchu, zegnij ręce w łokciach, a dłonie rozstawione na szerokość ramion lub nieco szerzej oprzyj na podłodze. \
                               Utrzymując ciało w jednej linii, podnieś się na rękach, aż do ich całkowitego wyprostowania. \
                               Wciąż zachowując linię prostą ciała, opuść się ku ziemi, zginając ręce w łokciach."
