@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout', 'mediaPlayer', 'ui.bootstrap']).
+angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout', 'mediaPlayer', 'ui.bootstrap', 'ngAnimate']).
     config(function ($routeProvider, $sceDelegateProvider) {
         $routeProvider.when('/start', {
             templateUrl: 'partials/start.html' });
