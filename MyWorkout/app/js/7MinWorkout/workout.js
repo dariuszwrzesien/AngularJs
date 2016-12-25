@@ -139,7 +139,7 @@ angular.module('7minWorkout').controller('WorkoutController',
                 description: "Proste napinanie mięśni brzucha jest podstawowym ćwiczeniem programu wzmacniającego.",
                 image: "img/crunches.png",
                 nameSound: "content/crunches.wav",
-                videos: ["//www.youtube.com/embed/Xyd_fa5zoEU", "//www.youtube.com/embed/MKmrqcoCZ-M"],
+                videos: ["Xyd_fa5zoEU", "MKmrqcoCZ-M"],
                 procedure: "Połóż się na plecach, zegnij nogi w kolanach i postaw stopy rozsunięte na szerokość bioder na podłodze. \
                               Oprzyj dłonie z tyłu głowy tak, by kciuki znalazły się za uszami. \
                               Łokcie rozchyl na boki i lekko unieś. \

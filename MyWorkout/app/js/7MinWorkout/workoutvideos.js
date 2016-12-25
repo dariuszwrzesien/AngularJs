@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('7minWorkout')
   .controller('WorkoutVideosController', ['$scope', '$modal', function ($scope, $modal) {
       $scope.playVideo = function (videoId) {
@@ -9,7 +7,7 @@ angular.module('7minWorkout')
               controller: VideoPlayerController,
               scope:$scope.$new(true),
               resolve: {
-                  video: function () {  
+                  video: function () {
                       return '//www.youtube.com/embed/' + videoId;
                   }
               },
