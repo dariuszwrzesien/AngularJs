@@ -34,7 +34,5 @@ angular.module('7minWorkout')
                 service.endTracking(false); // kończymy rejestrację jeśli w jej trakcie zostanie zmieniona trasa
             }
         });
-
-
         return service;
     }]);

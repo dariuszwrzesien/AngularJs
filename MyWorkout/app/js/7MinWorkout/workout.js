@@ -1,6 +1,6 @@
 angular.module('7minWorkout').controller('WorkoutController',
-    ['$scope', '$interval', '$location',
-        function($scope, $interval, $location) {
+    ['$scope', '$interval', '$location', 'workoutHistoryTracker',
+        function($scope, $interval, $location, workoutHistoryTracker) {
 
     /**
      * Model
@@ -56,6 +56,7 @@ angular.module('7minWorkout').controller('WorkoutController',
             duration: $scope.workoutPlan.restBetweenExercise
         };
 
+        workoutHistoryTracker.startTracking();
         $scope.currentExerciseIndex = 0;
         startExercise($scope.workoutPlan.exercises[0]);
     };
@@ -176,15 +177,24 @@ angular.module('7minWorkout').controller('WorkoutController',
             var next = getNextExercise($scope.currentExercise);
             if (next) {
                 startExercise(next);
-
             }
             else {
-                $location.path('/finish');
+                workoutComplete();
             }
         }, function (error) {
             console.log('Obietnica $interval anulowana. Powód: -' + error);
         });
         return promise;
+    }
+
+    /**
+     * Zakończenie treningu:
+     * 1. zakończ trakowanie
+     * 2. przejdz do strony finish
+     */
+    var workoutComplete = function () {
+        workoutHistoryTracker.endTracking(true);
+        $location.path('/finish');
     }
 
     /**
