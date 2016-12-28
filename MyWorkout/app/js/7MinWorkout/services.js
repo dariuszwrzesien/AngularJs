@@ -46,9 +46,9 @@ angular.module('7minWorkout')
         return service;
     }]);
 
-/**
- * Tworzymy usługe trzymajaca nazwy eventow
- */
-angular.module('7minWorkout').value("appEvents", {
-    workout: { exerciseStarted: "event:workout:exerciseStarted" }
-});
+// /**
+//  * Tworzymy usługe trzymajaca nazwy eventow
+//  */
+// angular.module('7minWorkout').value("appEvents", {
+//     workout: { exerciseStarted: "event:workout:exerciseStarted" }
+// });
