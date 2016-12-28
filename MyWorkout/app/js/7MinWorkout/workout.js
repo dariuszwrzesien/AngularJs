@@ -165,6 +165,8 @@ angular.module('7minWorkout').controller('WorkoutController',
     var startExercise = function (exercisePlan) {
         $scope.currentExercise = exercisePlan;
         $scope.currentExerciseDuration = 0;
+        $scope.$emit("event:workout:exerciseStarted",
+            exercisePlan.details); //Zgłasza (emituje w góre) event
         exerciseIntervalPromise = startExerciseTimeTracking();
     };
 

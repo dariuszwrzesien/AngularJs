@@ -34,5 +34,21 @@ angular.module('7minWorkout')
                 service.endTracking(false); // kończymy rejestrację jeśli w jej trakcie zostanie zmieniona trasa
             }
         });
+
+        /**
+         * Obsługa eventu emitowanego w workout.js
+         */
+        $rootScope.$on("event:workout:exerciseStarted", function (e, args) {
+            currentWorkoutLog.lastExercise = args.title; // tworzymy lastExcercise w currentWorkoutLog i przypisujemy mu przekazany title z obiektu Excercise
+            ++currentWorkoutLog.exercisesDone; // inkrementujemy excerciseDone
+        });
+
         return service;
     }]);
+
+/**
+ * Tworzymy usługe trzymajaca nazwy eventow
+ */
+angular.module('7minWorkout').value("appEvents", {
+    workout: { exerciseStarted: "event:workout:exerciseStarted" }
+});
