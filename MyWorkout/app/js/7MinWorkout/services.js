@@ -19,16 +19,17 @@ angular.module('7minWorkout')
                 workoutHistory.shift();
             }
             workoutHistory.push(currentWorkoutLog);
+            localStorageService.add(storageKey, workoutHistory);
         };
 
         service.endTracking = function (completed) {
             currentWorkoutLog.completed = completed;
             currentWorkoutLog.endedOn = new Date().toISOString();
             currentWorkoutLog = null;
-            localStorageService.add(storageKey, workoutHistory);
         };
 
         service.getHistory = function () {
+            console.log(localStorageService.get(storageKey) );
             return workoutHistory;
         }
 
