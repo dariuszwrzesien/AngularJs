@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('7minWorkout')
-    .factory('workoutHistoryTracker', ['$rootScope', function ($rootScope) {
-        var maxHistoryItems = 20;   // Rejestrowanych jest 20 ostatić ćwiczeń
-        var workoutHistory = [];
+    .factory('workoutHistoryTracker', ['$rootScope', 'appEvents', 'localStorageService', function ($rootScope) {
+        var maxHistoryItems = 20   // Rejestrowanych jest 20 ostatić ćwiczeń
+            , storageKey = "workouthistory"
+            , workoutHistory = localStorageService.get(storageKey) || [];
         var currentWorkoutLog = null;
         var service = {};
 
@@ -23,6 +24,7 @@ angular.module('7minWorkout')
             currentWorkoutLog.completed = completed;
             currentWorkoutLog.endedOn = new Date().toISOString();
             currentWorkoutLog = null;
+            localStorageService.add(storageKey, workoutHistory);
         };
 
         service.getHistory = function () {
@@ -46,9 +48,9 @@ angular.module('7minWorkout')
         return service;
     }]);
 
-// /**
-//  * Tworzymy usługe trzymajaca nazwy eventow
-//  */
-// angular.module('7minWorkout').value("appEvents", {
-//     workout: { exerciseStarted: "event:workout:exerciseStarted" }
-// });
+/**
+ * Tworzymy usługe trzymajaca nazwy eventow
+ */
+angular.module('7minWorkout').value("appEvents", {
+    workout: { exerciseStarted: "event:workout:exerciseStarted" }
+});
