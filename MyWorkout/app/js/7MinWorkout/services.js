@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('7minWorkout')
-    .factory('workoutHistoryTracker', ['$rootScope', 'appEvents', 'localStorageService', function ($rootScope) {
+    .factory('workoutHistoryTracker', ['$rootScope', 'appEvents', 'localStorageService',
+        function ($rootScope, appEvents, localStorageService) {
         var maxHistoryItems = 20   // Rejestrowanych jest 20 ostatić ćwiczeń
             , storageKey = "workouthistory"
             , workoutHistory = localStorageService.get(storageKey) || [];
