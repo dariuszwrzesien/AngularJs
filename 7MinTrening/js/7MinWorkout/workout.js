@@ -1,3 +1,4 @@
-/**
- * Created by darek on 23.10.17.
- */
+angular.module('7minWorkout').controller('WorkoutController',
+    ['$scope', function ($scope) {
+        
+    }]);
