@@ -43,6 +43,15 @@ angular.module('7minWorkout')
             $interval(function () {
                 $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
             }, 1000, $scope.currentExercise.duration);
+            .then(function () {
+                var next = getNextExercise(exercisePlan);
+                if (next) {
+                    startExercise(next);
+                }
+                else {
+                    console.log("Trening został zakończony!")
+                }
+            });
         };
 
         var getNextExercise = function (currentExercisePlan) {
@@ -57,17 +66,6 @@ angular.module('7minWorkout')
             }
             return nextExercise;
         };
-
-        $scope.$watch('currentExerciseDuration', function (nVal) {
-            if (nVal == $scope.currentExercise.duration) {
-                var next = getNextExercise($scope.currentExercise);
-                if (next) {
-                    startExercise(next);
-                } else {
-                    console.log("Trening został zakończony!")
-                }
-            }
-        });
 
         var createWorkout = function () {
             var workout = new WorkoutPlan({
