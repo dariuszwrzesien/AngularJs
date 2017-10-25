@@ -42,7 +42,7 @@ angular.module('7minWorkout')
             $scope.currentExerciseDuration = 0;
             $interval(function () {
                 $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
-            }, 1000, $scope.currentExercise.duration);
+            }, 1000, $scope.currentExercise.duration)
             .then(function () {
                 var next = getNextExercise(exercisePlan);
                 if (next) {
