@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('7minWorkout')
-    .controller('WorkoutController', ['$scope', '$interval', function ($scope, $interval) {
+    .controller('WorkoutController', ['$scope', '$interval', '$location', function ($scope, $interval, $location) {
+
+        const EXCERCISE_DURATION = 1;
+
         function WorkoutPlan(args) {
             this.exercises = [];
             this.name = args.name;
@@ -49,7 +52,7 @@ angular.module('7minWorkout')
                     startExercise(next);
                 }
                 else {
-                    console.log("Trening został zakończony!")
+                    $location.path('/finish');
                 }
             });
         };
@@ -71,7 +74,7 @@ angular.module('7minWorkout')
             var workout = new WorkoutPlan({
                 name: "7minWorkout",
                 title: "7-minutowy trening",
-                restBetweenExercise: 10
+                restBetweenExercise: 1
             });
 
             workout.exercises.push({
@@ -86,7 +89,7 @@ angular.module('7minWorkout')
                               W wyskoku rozłącz nogi, mniej więcej na szerokość ramion lub nieco szerzej, i jednocześnie wykonaj lekko zgiętymi w łokciach rękoma wymach nad głową. \
                               Po wylądowaniu na podłodze stopy są rozstawione na szerokość ramion, a lekko zgięte, uniesione nad głowę ręce stykają się dłońmi. "
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -100,7 +103,7 @@ angular.module('7minWorkout')
                               Następnie, wciąż opierając się o ścianę, zsuwaj tułów w dół aż do momentu, gdy nogi zgięte w kolanach utworzą kąt prosty. \
                               Wytrzymaj chwilę w tej pozycji."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -113,7 +116,7 @@ angular.module('7minWorkout')
                               Utrzymując ciało w jednej linii, podnieś się na rękach, aż do ich całkowitego wyprostowania. \
                               Wciąż zachowując linię prostą ciała, opuść się ku ziemi, zginając ręce w łokciach."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -128,7 +131,7 @@ angular.module('7minWorkout')
                               Delikatnie napnij mięśnie brzucha i unieś, odrywając od podłogi, tylko głowę, szyję oraz ramiona. \
                               Utrzymaj przez chwilę taką pozycję, a następnie z powrotem opuść górną część ciała na podłogę."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -142,7 +145,7 @@ angular.module('7minWorkout')
                               Postaw jedną stopę na krześle, a następnie wejdź na krzesło, dostawiając drugą stopę. \
                               Zejdź z krzesła, zaczynając do pierwszej stopy, potem zdejmij z niego drugą stopę i stań w pozycji wyjściowej."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -158,7 +161,7 @@ angular.module('7minWorkout')
                               Zginaj kolana do momentu, gdy uda ustawią się równolegle do podłogi, a kolana znajdą się nad kostkami. \
                               Przenieś ciężar ciała na pięty. Napnij mięśnie, a następnie podnieś się do pozycji wyjściowej."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -172,7 +175,7 @@ angular.module('7minWorkout')
                               Nie poruszając nogami, przesuń pośladki do przodu, poza krzesło. \
                               Powoli opuść ciało. Kiedy ręce w łokciach będą zgięte pod kątem 90 stopni, zatrzymaj się, po czym powoli podnieś ciało w górę do pozycji wyjściowej."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -186,7 +189,7 @@ angular.module('7minWorkout')
                               Łokcie powinny się znajdować bezpośrednio pod barkami, a ciało tworzy linię prostą, zaczynając od głowy, a kończąc na stopach. \
                               Wytrzymaj chwilę w tej pozycji."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -199,7 +202,7 @@ angular.module('7minWorkout')
                               Podnieś kolano w górę, dociągając je maksymalnie do klatki piersiowej. \
                               Powtórz ćwiczenie na drugą nogę."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -214,7 +217,7 @@ angular.module('7minWorkout')
                               W trakcie wykonywania wykroku zniż biodra i zegnij nogi w kolanach tak, by łydki i uda tworzyły kąt prosty. \
                               Wróć do pozycji wyjściowej. Powtórz ćwiczenie na drugą nogę."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -226,7 +229,7 @@ angular.module('7minWorkout')
                     procedure: "Przyjmij klasyczną pozycję do pompek, ale podczas podnoszenia się obróć się tak, by wyprostowana prawa ręka znalazła się w górze nad głową. \
                               Wróć do pozycji wyjściowej, a następnie powtórz ćwiczenie, wyciągając ku górze lewą rękę."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
             workout.exercises.push({
                 details: new Exercise({
@@ -241,7 +244,7 @@ angular.module('7minWorkout')
                               Trzymaj biodra prosto, a szyję w jednej linii z kręgosłupem. \
                               Wytrzymaj chwilę w takiej pozycji."
                 }),
-                duration: 30
+                duration: EXCERCISE_DURATION
             });
 
             return workout;
